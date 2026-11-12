@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Studio Halo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Instrument+Serif:ital@0;1&family=Pinyon+Script&display=swap">
+<style>
+/* Layout: editorial split panels separated by hairlines, pink marquee bands between sections, script-italic accent words inside serif headlines */
+:root {
+  --bg: #ECE9E1;
+  --panel: #F5F3EC;
+  --fg: #1C1718;
+  --muted: #5E5558;
+  --line: #1C171833;
+  --pink: #E99BC4;
+  --pink-soft: #F2C3DC;
+  --accent-text: #B2437F;
+  --on-pink: #1C1718;
+  --font-display: "Instrument Serif", "Times New Roman", serif;
+  --font-script: "Pinyon Script", "Brush Script MT", cursive;
+  --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1A1417; --panel: #231B1F; --fg: #F3EBEE; --muted: #B9ABB1;
+    --line: #F3EBEE30; --pink: #E99BC4; --pink-soft: #6B3A55; --accent-text: #F0A9CE;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1A1417; --panel: #231B1F; --fg: #F3EBEE; --muted: #B9ABB1;
+  --line: #F3EBEE30; --pink: #E99BC4; --pink-soft: #6B3A55; --accent-text: #F0A9CE;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+  padding-block: 0;
+}
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; line-height: 1.02; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+p { margin: 0; max-width: 60ch; }
+em, .script { font-family: var(--font-script); font-style: normal; color: var(--accent-text); letter-spacing: 0; }
+:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 3px; }
+
+.wrap { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.inner { max-width: 1180px; margin: 0 auto; }
+
+/* nav */
+nav { border-bottom: 1px solid var(--line); background: var(--panel); }
+nav .inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; flex-wrap: wrap; }
+.logo { font-family: var(--font-script); font-size: 30px; color: var(--accent-text); text-decoration: none; line-height: 1; }
+.logo b { font-family: var(--font-display); font-weight: 400; color: var(--fg); font-size: 22px; letter-spacing: .04em; text-transform: uppercase; }
+nav ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; font-size: 13px; flex-wrap: wrap; }
+nav a { text-decoration: none; }
+nav ul a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* hero */
+.hero { display: grid; grid-template-columns: 1fr 1.15fr; border-bottom: 1px solid var(--line); }
+.hero > div { min-width: 0; }
+.hero .art { padding: 40px; display: grid; place-items: center; border-right: 1px solid var(--line); }
+.hero .copy { padding: 56px 40px; display: flex; flex-direction: column; gap: 24px; justify-content: center; align-items: flex-start; }
+.hero h1 { font-size: clamp(46px, 7vw, 92px); }
+.hero p { color: var(--muted); }
+.tag { display: inline-block; font-family: var(--font-script); font-size: 20px; color: var(--on-pink); background: var(--pink); border: 1px solid var(--on-pink); border-radius: 50%; padding: 2px 20px 6px; transform: rotate(-6deg); line-height: 1.2; }
+.btn { display: inline-flex; align-items: center; gap: 8px; background: var(--pink); color: var(--on-pink); border: 1px solid var(--on-pink); border-radius: 999px; padding: 10px 26px; font: 500 13px var(--font-body); text-decoration: none; cursor: pointer; transition: transform .15s ease; }
+.btn:hover { transform: translateY(-2px); }
+
+/* image placeholders built from shapes */
+.ph { position: relative; width: 100%; aspect-ratio: 4 / 5; max-width: 360px; background: var(--pink-soft); border: 1px solid var(--line); overflow: hidden; }
+.ph::before { content: ""; position: absolute; left: 50%; bottom: -8%; width: 78%; aspect-ratio: 1 / 1.25; transform: translateX(-50%); background: var(--pink); border-radius: 50% 50% 0 0 / 40% 40% 0 0; }
+.ph::after { content: ""; position: absolute; left: 50%; top: 18%; width: 30%; aspect-ratio: 1; transform: translateX(-50%); background: var(--bg); border-radius: 50%; border: 1px solid var(--on-pink); }
+.ph.alt::before { width: 60%; left: 30%; border-radius: 999px 999px 0 0; background: var(--bg); }
+.ph.alt::after { left: 72%; top: 30%; width: 38%; background: var(--pink); }
+.ph.wide { aspect-ratio: 16 / 10; max-width: none; }
+.ph.sq { aspect-ratio: 1; max-width: none; }
+
+/* marquee */
+.band { background: var(--pink); color: var(--on-pink); border-block: 1px solid var(--on-pink); overflow: hidden; }
+.track { display: flex; width: max-content; animation: slide 28s linear infinite; }
+.track span { padding: 12px 22px; font-size: 13px; font-weight: 500; white-space: nowrap; display: inline-flex; align-items: center; gap: 22px; }
+.track span::after { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--on-pink); }
+@keyframes slide { to { transform: translateX(-50%); } }
+.names .inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; padding-block: 26px; font-family: var(--font-display); font-size: 26px; }
+.names .inner span:nth-child(2) { font-style: italic; }
+.names .inner span:nth-child(3) { font-family: var(--font-body); font-weight: 700; letter-spacing: -.03em; }
+.names .inner span:nth-child(4) { font-family: var(--font-body); font-weight: 700; font-size: 15px; letter-spacing: .12em; text-transform: uppercase; }
+
+/* sections */
+section { border-bottom: 1px solid var(--line); }
+.pad { padding-block: 72px; }
+.center { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+.center p { color: var(--muted); }
+h2.big { font-size: clamp(36px, 5vw, 64px); }
+
+/* intro split */
+.split { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 48px; }
+.split > * { min-width: 0; }
+.split .stack { display: flex; flex-direction: column; gap: 20px; align-items: flex-start; }
+.split p { color: var(--muted); }
+
+/* services accordion */
+.acc { display: grid; gap: 0; border-top: 1px solid var(--line); }
+details { border-bottom: 1px solid var(--line); background: var(--pink-soft); }
+details:nth-child(2) { background: color-mix(in srgb, var(--pink-soft) 70%, var(--bg)); }
+details:nth-child(3) { background: color-mix(in srgb, var(--pink-soft) 45%, var(--bg)); }
+summary { list-style: none; cursor: pointer; padding: 20px 26px; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-family: var(--font-display); font-size: 26px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-family: var(--font-body); font-size: 22px; transition: transform .2s ease; }
+details[open] summary::after { transform: rotate(45deg); }
+details .body { padding: 0 26px 26px; color: var(--fg); display: grid; gap: 14px; }
+details ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 15px; }
+
+/* work */
+.work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 44px; }
+.work-grid > * { min-width: 0; }
+.work h3 { font-size: 26px; margin-top: 16px; }
+.work small { display: block; color: var(--muted); font-size: 13px; margin-top: 4px; }
+.work .btn { margin-top: 14px; padding: 6px 18px; font-size: 12px; }
+
+/* philosophy */
+.phil { display: grid; grid-template-columns: 1.1fr 1fr; }
+.phil > * { min-width: 0; }
+.phil .rows > h2 { padding: 40px 40px 28px; font-size: clamp(34px, 4vw, 52px); border-bottom: 1px solid var(--line); }
+.phil .row { padding: 28px 40px; border-bottom: 1px solid var(--line); display: grid; gap: 8px; }
+.phil .row:last-child { border-bottom: 0; }
+.phil .row h3 { font-size: 26px; }
+.phil .row p { color: var(--muted); font-size: 15px; }
+.phil .art { display: grid; place-items: center; padding: 40px; border-left: 1px solid var(--line); background: var(--pink-soft); }
+
+/* stats */
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--line); background: var(--panel); margin-top: 8px; width: 100%; max-width: 860px; }
+.stats > div { padding: 28px 16px; display: grid; gap: 4px; min-width: 0; }
+.stats > div + div { border-left: 1px solid var(--line); }
+.stats b { font-family: var(--font-display); font-weight: 400; font-size: 40px; line-height: 1; font-variant-numeric: tabular-nums; }
+.stats span { font-size: 13px; color: var(--muted); }
+
+/* testimonial */
+.testi { position: relative; overflow: hidden; }
+.testi .ribbon { background: var(--pink-soft); border-block: 1px solid var(--line); overflow: hidden; transform: rotate(-2deg); margin-block: 26px; }
+.testi .ribbon .track { animation-duration: 40s; }
+.testi .ribbon span { font-family: var(--font-display); font-style: italic; font-size: 22px; padding: 4px 16px; }
+.testi .ribbon span::after { display: none; }
+.quote { background: var(--panel); border: 1px solid var(--line); max-width: 640px; margin: -10px auto 0; padding: 40px 32px; text-align: center; display: grid; gap: 16px; justify-items: center; position: relative; }
+.quote blockquote { margin: 0; font-family: var(--font-display); font-size: 28px; line-height: 1.15; text-wrap: balance; }
+.quote p { color: var(--muted); font-size: 14px; }
+.avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--pink); border: 1px solid var(--on-pink); }
+
+/* contact */
+.contact { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+.contact > * { min-width: 0; }
+.contact .left { display: grid; gap: 22px; justify-items: start; }
+.contact .left p { color: var(--muted); }
+form { display: grid; gap: 18px; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.two > * { min-width: 0; }
+label { display: grid; gap: 6px; font-size: 12px; color: var(--muted); }
+input, textarea { font: 400 15px var(--font-body); color: var(--fg); background: var(--panel); border: 1px solid var(--fg); border-radius: 999px; padding: 10px 16px; width: 100%; }
+textarea { border-radius: 14px; min-height: 120px; resize: vertical; }
+#form-note { font-size: 13px; color: var(--accent-text); min-height: 1.4em; }
+
+footer { background: var(--pink); color: var(--on-pink); border-top: 1px solid var(--on-pink); }
+footer .inner { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; padding-block: 18px; font-size: 13px; }
+footer a { text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+@media (max-width: 860px) {
+  .hero, .split, .phil, .contact { grid-template-columns: 1fr; }
+  .hero .art { border-right: 0; border-bottom: 1px solid var(--line); padding: 28px; }
+  .hero .copy { padding: 40px 20px; }
+  .phil .art { border-left: 0; border-top: 1px solid var(--line); }
+  .work-grid { grid-template-columns: 1fr; }
+  .pad { padding-block: 52px; }
+  .phil .rows > h2, .phil .row { padding-left: 20px; padding-right: 20px; }
+  .stats b { font-size: 30px; }
+  .two { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .track { animation: none; } .btn { transition: none; } }
+</style>
+
+</head>
+<body>
+<nav class="wrap">
+  <div class="inner">
+    <a class="logo" href="#top"><span class="script">Studio</span> <b>Halo</b></a>
+    <ul>
+      <li><a href="#top">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="top">
+  <section class="hero">
+    <div class="art"><div class="ph" role="img" aria-label="Placeholder portrait, swap in your own photo"></div></div>
+    <div class="copy" style="padding-right:max(20px, env(safe-area-inset-right, 0px))">
+      <span class="tag">Say hello</span>
+      <h1>Build it once, <em>beautifully</em>.</h1>
+      <p>We design and develop websites, apps and connected devices for small teams who want their product to look as good as it works.</p>
+      <a class="btn" href="#contact">Start a project →</a>
+    </div>
+  </section>
+
+  <div class="band" aria-hidden="true">
+    <div class="track">
+      <span>Now booking</span><span>Now booking</span><span>Now booking</span><span>Now booking</span><span>Now booking</span><span>Now booking</span><span>Now booking</span><span>Now booking</span><span>Now booking</span><span>Now booking</span><span>Now booking</span><span>Now booking</span>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap"><div class="inner pad split">
+      <div class="stack">
+        <h2 class="big">Helping your product get closer to its <em>goals</em></h2>
+        <p>Studio Halo is a small build team. You work directly with the people writing the code and drawing the screens, from the first sketch to launch day and the weeks after.</p>
+        <a class="btn" href="#services">See how we help →</a>
+      </div>
+      <div class="ph wide" role="img" aria-label="Placeholder image"></div>
+    </div></div>
+  </section>
+
+  <section id="services">
+    <div class="wrap"><div class="inner pad center">
+      <h2 class="big">What we <em>offer</em></h2>
+      <p>Three ways to work together. Open one to see what is included.</p>
+    </div></div>
+    <div class="acc">
+      <details open>
+        <summary>Websites &amp; Web Apps</summary>
+        <div class="body wrap"><div class="inner"><ul><li>Design and build in React or plain HTML</li><li>Content management you can actually use</li><li>Hosting, domain and analytics setup</li></ul></div></div>
+      </details>
+      <details>
+        <summary>Mobile Apps</summary>
+        <div class="body wrap"><div class="inner"><ul><li>React Native apps for iOS and Android</li><li>Backend, login and push notifications</li><li>Store submission and updates</li></ul></div></div>
+      </details>
+      <details>
+        <summary>Devices &amp; Networks</summary>
+        <div class="body wrap"><div class="inner"><ul><li>ESP32 and Arduino prototypes with dashboards</li><li>MikroTik network setup and monitoring</li><li>Documentation your team can maintain</li></ul></div></div>
+      </details>
+    </div>
+  </section>
+
+  <section class="names" aria-label="Selected clients">
+    <div class="band" style="border-block-width:0 0 0 0">
+      <div class="wrap"><div class="inner"><span>Northwind</span><span>Lumen &amp; Co</span><span>Kapwa</span><span>Bayanihan Labs</span></div></div>
+    </div>
+  </section>
+
+  <section id="work" class="work">
+    <div class="wrap"><div class="inner pad">
+      <div class="center">
+        <h2 class="big">Recent <em>work</em></h2>
+        <p>A few projects from the last year. Replace these cards with your own.</p>
+      </div>
+      <div class="work-grid">
+        <article>
+          <div class="ph sq" role="img" aria-label="Placeholder project image"></div>
+          <h3>Kapwa Clinic</h3>
+          <small>Booking site · Web app</small>
+          <a class="btn" href="#contact">View work →</a>
+        </article>
+        <article>
+          <div class="ph sq alt" role="img" aria-label="Placeholder project image"></div>
+          <h3>Lumen &amp; Co</h3>
+          <small>Storefront · Branding</small>
+          <a class="btn" href="#contact">View work →</a>
+        </article>
+        <article>
+          <div class="ph sq" role="img" aria-label="Placeholder project image"></div>
+          <h3>Bayanihan Labs</h3>
+          <small>Sensor dashboard · Embedded</small>
+          <a class="btn" href="#contact">View work →</a>
+        </article>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="phil">
+    <div class="rows">
+      <h2>Our <em>philosophy</em></h2>
+      <div class="row"><h3>Dedicated to <em>success</em></h3><p>We measure a project by whether it keeps working after we hand it over.</p></div>
+      <div class="row"><h3>Your product comes <em>first</em></h3><p>No templates pushed on you. We start from what your users need.</p></div>
+      <div class="row"><h3>People over <em>profits</em></h3><p>Clear quotes, honest timelines, and a direct line to the team.</p></div>
+    </div>
+    <div class="art"><div class="ph alt" role="img" aria-label="Placeholder team image"></div></div>
+  </section>
+
+  <section>
+    <div class="wrap"><div class="inner pad center">
+      <h2 class="big">Let's break it <em>down</em></h2>
+      <p>A quick look at what we have shipped so far. Edit the numbers to match yours.</p>
+      <div class="stats">
+        <div><b>40+</b><span>Projects shipped</span></div>
+        <div><b>25</b><span>Happy clients</span></div>
+        <div><b>3</b><span>Years in business</span></div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="testi">
+    <div class="ribbon" aria-hidden="true"><div class="track">
+      <span>Testimonials</span><span>Testimonials</span><span>Testimonials</span><span>Testimonials</span><span>Testimonials</span><span>Testimonials</span><span>Testimonials</span><span>Testimonials</span><span>Testimonials</span><span>Testimonials</span><span>Testimonials</span><span>Testimonials</span>
+    </div></div>
+    <div class="wrap" style="padding-bottom:72px"><div class="quote">
+      <div class="avatar" aria-hidden="true"></div>
+      <blockquote>“They shipped in half the time I expected and the site feels exactly like our brand.”</blockquote>
+      <p>Sample client · Owner, Kapwa Clinic</p>
+    </div></div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap"><div class="inner pad contact">
+      <div class="left">
+        <span class="tag">Ready for this?</span>
+        <h2 class="big">Get in touch</h2>
+        <p>Tell us what you are building and when you need it. We reply within two working days.</p>
+      </div>
+      <form id="contact-form" novalidate>
+        <label for="name">Name<input id="name" name="name" autocomplete="name" required></label>
+        <label for="email">Email<input id="email" name="email" type="email" autocomplete="email" required></label>
+        <label for="msg">Message<textarea id="msg" name="msg" required></textarea></label>
+        <div><button class="btn" type="submit">Send</button></div>
+        <div id="form-note" role="status"></div>
+      </form>
+    </div></div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="inner">
+    <a href="#top">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#work">Work</a><a href="#contact">Contact</a>
+    <span>© 2026 Studio Halo</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var f = document.getElementById('contact-form');
+  var note = document.getElementById('form-note');
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!f.name.value.trim() || !f.email.value.trim() || !f.msg.value.trim()) {
+      note.textContent = 'Please fill in your name, email and message.';
+      return;
+    }
+    note.textContent = 'Preview only: this form is not connected to an inbox yet.';
+  });
+})();
+</script>
+</body>
+</html>
