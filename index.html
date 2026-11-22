@@ -181,6 +181,36 @@ footer a:hover { text-decoration: underline; }
   .two { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) { .track { animation: none; } .btn { transition: none; } }
+
+/* Additions for the project content. They reuse the tokens above and leave every rule above unchanged. */
+/* real photos: put <img> inside a .ph and add the has-img class to hide the placeholder shapes */
+.ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+.ph.has-img::before, .ph.has-img::after { display: none; }
+/* stage label and lists inside split panels */
+.stage { font-size: 12px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-text); }
+.split .stack ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 15px; display: grid; gap: 6px; }
+.split.flip > .ph { order: -1; }
+/* theory text inside the accordion */
+details li strong { color: var(--fg); font-weight: 700; }
+details li + li { margin-top: 8px; }
+/* timeline, in the same hairline and pink-dot style */
+.tl { list-style: none; margin: 44px auto 0; padding: 0; max-width: 860px; border-left: 1px solid var(--line); text-align: left; }
+.tl li { position: relative; padding: 0 0 38px 32px; display: grid; gap: 6px; justify-items: start; }
+.tl li:last-child { padding-bottom: 0; }
+.tl li::before { content: ""; position: absolute; left: -6px; top: 10px; width: 11px; height: 11px; border-radius: 50%; background: var(--pink); border: 1px solid var(--on-pink); }
+.tl .when { font-family: var(--font-script); font-size: 26px; line-height: 1; color: var(--accent-text); }
+.tl h3 { font-size: 28px; }
+.tl .type { font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; background: var(--pink-soft); border: 1px solid var(--line); border-radius: 999px; padding: 2px 12px; }
+.tl p { color: var(--muted); font-size: 15px; max-width: 64ch; }
+.tl p strong { color: var(--fg); font-weight: 700; }
+/* references */
+.refs { display: grid; gap: 16px; justify-items: start; }
+.refs p { color: var(--muted); font-size: 15px; max-width: 72ch; }
+.refs p.ref { padding-left: 2em; text-indent: -2em; overflow-wrap: anywhere; }
+@media (max-width: 860px) {
+  .split.flip > .ph { order: 0; }
+  .tl li { padding-left: 22px; }
+}
 </style>
 
 </head>
@@ -191,124 +221,338 @@ footer a:hover { text-decoration: underline; }
     <ul>
       <li><a href="#top">Home</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#studies">Studies</a></li>
-      <li><a href="#projects">Projects</a></li>
+      <li><a href="#milestones">Milestones</a></li>
+      <li><a href="#theories">Theories</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#reflection">Reflection</a></li>
+      <li><a href="#references">References</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
 </nav>
 
-<!-- first paragraph -->
+<!-- Home page: welcome to my developmental journey -->
 
 <main id="top">
   <section class="hero">
-    <div class="art"><div class="ph" role="img" aria-label="Placeholder portrait. Replace with Gennay's photo."></div></div>
+    <!-- PHOTO: to use a real welcome photo, replace the placeholder with
+         <div class="ph has-img"><img src="welcome.jpg" alt="Alex smiling"></div> -->
+    <div class="art"><div class="ph" role="img" aria-label="Placeholder portrait. Replace with Alex's welcome photo."></div></div>
     <div class="copy" style="padding-right:max(20px, env(safe-area-inset-right, 0px))">
       <span class="tag">Hello there</span>
-      <h1>Understanding people, <em>one mind</em> at a time.</h1>
-      <p>I'm Gennay Alex Salinas, a second-year psychology student from Pampanga, Philippines. I'm curious about how people think, feel and grow.</p>
-      <a class="btn" href="#contact">Get in touch →</a>
+      <h1>Welcome to my developmental <em>journey</em></h1>
+      <p>I'm Gennay Alex Salinas, but please call me Alex. I'm a 19-year-old psychology student from Pampanga, Philippines. This site follows my 19 years, from birth to today, along with the developmental theories that connect to my story.</p>
+      <a class="btn" href="#milestones">Begin the journey →</a>
     </div>
   </section>
 
 <!-- Rolling display -->
 
   <div class="band" aria-hidden="true">
-    <div class="track"><span>Psychology student</span><span>Psychology student</span><span>Psychology student</span><span>Psychology student</span><span>Psychology student</span><span>Psychology student</span><span>Psychology student</span><span>Psychology student</span><span>Psychology student</span><span>Psychology student</span><span>Psychology student</span><span>Psychology student</span></div>
+    <div class="track"><span>Alex's developmental journey</span><span>Alex's developmental journey</span><span>Alex's developmental journey</span><span>Alex's developmental journey</span><span>Alex's developmental journey</span><span>Alex's developmental journey</span><span>Alex's developmental journey</span><span>Alex's developmental journey</span><span>Alex's developmental journey</span><span>Alex's developmental journey</span><span>Alex's developmental journey</span><span>Alex's developmental journey</span></div>
   </div>
 
-  <!-- Second paraphraph -->
+  <!-- About me -->
 
   <section id="about">
     <div class="wrap"><div class="inner pad split">
       <div class="stack">
         <h2 class="big">A little about <em>me</em></h2>
-        <p>I'm studying psychology because I want to understand people and help them feel heard. I like asking good questions, listening closely and turning what I learn in class into something useful.</p>
-        <a class="btn" href="#studies">See what I study →</a>
+        <p>I'm Alex, a second-year psychology student and a working student. I would describe myself as courageous and brave, because I was able to overcome what I went through in my past experiences.</p>
+        <p>I'm studying psychology because I want to understand people and help them feel heard. One day, I hope to use what I learn to build a career that keeps me mentally, financially and physically healthy.</p>
+        <a class="btn" href="#milestones">See my milestones →</a>
       </div>
-      <div class="ph wide" role="img" aria-label="Placeholder image. Replace with your own photo."></div>
+      <!-- PHOTO: replace with <div class="ph wide has-img"><img src="about.jpg" alt="..."></div> -->
+      <div class="ph wide" role="img" aria-label="Placeholder photo of Alex. Replace with your own photo."></div>
     </div></div>
   </section>
 
+  <!-- Motto -->
 
-  <!-- ///////////////////////////////////////////// -->
+  <section aria-label="My motto">
+    <div class="wrap"><div class="inner pad">
+      <div class="quote">
+        <blockquote>“Take a risk, or lose the chance.”</blockquote>
+        <p>I aspire to be someone who does it now and isn't scared of what is about to come.</p>
+      </div>
+    </div></div>
+  </section>
 
-  <section id="studies">
+  <!-- Milestones: intro -->
+
+  <section id="milestones">
     <div class="wrap"><div class="inner pad center">
-      <h2 class="big">What I'm <em>learning</em></h2>
-      <p>Areas I'm exploring in my second year. Open one to read more.</p>
+      <h2 class="big">My journey, <em>stage by stage</em></h2>
+      <p>Four stages of my life so far, from before I was born to the person I am today.</p>
+    </div></div>
+  </section>
+
+  <!-- Stage 1: prenatal and infancy -->
+
+  <section id="beginning">
+    <div class="wrap"><div class="inner pad split">
+      <div class="stack">
+        <span class="stage">Prenatal development &amp; infancy · Conception to 2 years</span>
+        <h2 class="big">My <em>beginning</em></h2>
+        <p>I was born in 2007 at Diosdado Macapagal Hospital in Sta. Rita, Pampanga. My mother's pregnancy was at risk. She was bleeding about three weeks before she gave birth to me through normal delivery.</p>
+        <p>My dad was my main hands-on caregiver, since my mom started working when I was 3 months old, so my attachment grew with him. My family remembers that I walked and sang “Bahay Kubo” before I turned one, that they felt anxious whenever I cried because no one could calm me down, and that I loved babbling to other people.</p>
+        <ul>
+          <li>A pregnancy that was at risk, followed by a normal delivery</li>
+          <li>Walking before my first birthday</li>
+          <li>Singing “Bahay Kubo” before age 1</li>
+          <li>A strong attachment to my dad, my main caregiver</li>
+        </ul>
+      </div>
+      <!-- PHOTO: replace with <div class="ph wide has-img"><img src="infancy.jpg" alt="Alex as a baby"></div> -->
+      <div class="ph wide" role="img" aria-label="Placeholder photo from infancy. Replace with your own photo."></div>
+    </div></div>
+  </section>
+
+  <!-- Stage 2: childhood -->
+
+  <section id="childhood">
+    <div class="wrap"><div class="inner pad split flip">
+      <div class="stack">
+        <span class="stage">Early &amp; middle childhood</span>
+        <h2 class="big">My <em>childhood</em></h2>
+        <p>One of my earliest memories is from age 3. I had pooped in the living room while my brother and I were home alone, and his solution was to pour a whole gallon of mineral water all over the floor.</p>
+        <p>My dad helped me learn to talk clearly, read and write by the time I was 5. School did not start well, because I was still learning about friendship. I remember pulling a classmate's hair after they stole my bag. But school also taught me what is right and wrong. Outside of school, I played with my cousins: we did pretend play, climbed trees and crawled through rice fields. I grew up as an extrovert who loves talking and socializing, and that is where my confidence and independence began. My biggest challenge back then was pretending to sleep at noon.</p>
+        <ul>
+          <li>Age 3: my earliest memory</li>
+          <li>Age 5: talking clearly, reading and writing with my dad's help</li>
+          <li>Starting school and learning rules, right and wrong</li>
+          <li>Pretend play, tree climbing and rice-field adventures with my cousins</li>
+        </ul>
+      </div>
+      <!-- PHOTO: replace with <div class="ph wide has-img"><img src="childhood.jpg" alt="Alex as a child"></div> -->
+      <div class="ph wide alt" role="img" aria-label="Placeholder photo from childhood. Replace with your own photo."></div>
+    </div></div>
+  </section>
+
+  <!-- Stage 3: adolescence -->
+
+  <section id="adolescence">
+    <div class="wrap"><div class="inner pad split">
+      <div class="stack">
+        <span class="stage">Adolescence</span>
+        <h2 class="big">My teenage <em>years</em></h2>
+        <p>I grew taller than my classmates when puberty began. Emotionally, I felt like the same Alex as when I was young, because I still loved playing outside. My friendships widened as I explored more, and I stayed close to the people I felt comfortable with. At home, nothing changed: my family was still my safe and happy place, and I always asked for their permission and opinion when deciding on parts of my life.</p>
+        <p>In high school I became competitive and always strived to be at the top of my class, and I graduated with high honors. This stage also brought hard moments. I lost my grandmother during the COVID-19 pandemic, and I had my heart broken in grade 12. Those trials made me strong and pushed me to keep going.</p>
+        <ul>
+          <li>A growth spurt during puberty</li>
+          <li>Wider friendships, with family as my constant</li>
+          <li>A competitive streak and graduating with high honors</li>
+          <li>Losing my grandmother and a heartbreak in grade 12</li>
+        </ul>
+      </div>
+      <!-- PHOTO: replace with <div class="ph wide has-img"><img src="teen.jpg" alt="Alex as a teenager"></div> -->
+      <div class="ph wide" role="img" aria-label="Placeholder photo from my teenage years. Replace with your own photo."></div>
+    </div></div>
+  </section>
+
+  <!-- Stage 4: emerging adulthood -->
+
+  <section id="present">
+    <div class="wrap"><div class="inner pad split flip">
+      <div class="stack">
+        <span class="stage">My present self · Emerging adulthood</span>
+        <h2 class="big">Who I am <em>now</em></h2>
+        <p>Late adolescence shaped who I am, but emerging adulthood fits me best today. I have passed my major and minor courses in college while working, and I think being a working student deserves recognition too. Working made me more independent, because I manage tasks and decide on my own. I also manage my own money, and the responsibility of spending wisely is still hard.</p>
+        <p>I found new college friends I can rely on, and my family stays the same: they keep inspiring me to be a better version of myself. I love baking and watching movies and series to redirect my stress. My biggest challenges are managing my time and the responsibilities of being a working student. To cope, I find a coffee shop to stay in and take a full day to rest. In the future, I want to be mentally, financially and physically healthy, and to use my knowledge of psychology in a company or from home.</p>
+        <ul>
+          <li>Passing my major and minor courses</li>
+          <li>Working while studying, and managing my own money</li>
+          <li>New friends in college and a steady family</li>
+          <li>Baking and movies to redirect stress</li>
+        </ul>
+      </div>
+      <!-- PHOTO: replace with <div class="ph wide has-img"><img src="today.jpg" alt="Alex today"></div> -->
+      <div class="ph wide alt" role="img" aria-label="Placeholder photo of Alex today. Replace with your own photo."></div>
+    </div></div>
+  </section>
+
+  <section class="names" aria-label="Themes">
+    <div class="band">
+      <div class="wrap"><div class="inner"><span>Courage</span><span>Family</span><span>Resilience</span><span>Growth</span></div></div>
+    </div>
+  </section>
+
+  <!-- Theories -->
+
+  <section id="theories">
+    <div class="wrap"><div class="inner pad center">
+      <h2 class="big">Theories behind <em>my story</em></h2>
+      <p>Three developmental theories help me understand my own experiences. Open one to read more.</p>
     </div></div>
     <div class="acc">
       <details open>
-        <summary>Developmental Psychology</summary>
-        <div class="body wrap"><div class="inner"><ul><li>How people change from childhood to adulthood</li><li>The role of family, school and community</li><li>Why early experiences matter</li></ul></div></div>
+        <summary>Erik Erikson: Psychosocial Theory</summary>
+        <div class="body wrap"><div class="inner"><ul>
+          <li><strong>The theory:</strong> Erikson proposed that we pass through eight stages of development across the lifespan. At each stage we face a social challenge, or crisis, and how we handle it shapes our sense of self (Spielman et al., 2020).</li>
+          <li><strong>My experience:</strong> My dad was my main caregiver as a baby and my attachment to him grew. In school I strived to be at the top of my class and graduated with high honors. In college I found new friends I can rely on.</li>
+          <li><strong>How it explains my development:</strong> In infancy, the task is trust versus mistrust, which depends on caregivers meeting a baby's needs. My dad's steady care fits that picture of building trust. In the school years, industry versus inferiority is about growing confident in one's abilities, which matches my drive to do well in class. In early adulthood, intimacy versus isolation is about forming close relationships, which reflects the friendships I am building in college.</li>
+          <li><strong>Key terms:</strong> Trust vs. mistrust · Industry vs. inferiority · Intimacy vs. isolation</li>
+        </ul></div></div>
       </details>
       <details>
-        <summary>Social &amp; Behavioral Psychology</summary>
-        <div class="body wrap"><div class="inner"><ul><li>How groups and culture shape behavior</li><li>Communication, empathy and relationships</li><li>Everyday decision making</li></ul></div></div>
+        <summary>Jean Piaget: Cognitive Development</summary>
+        <div class="body wrap"><div class="inner"><ul>
+          <li><strong>The theory:</strong> Piaget said children think differently from adults and move through four stages of cognitive development. They build mental frameworks called schemata, which they adjust through assimilation and accommodation (Spielman et al., 2020).</li>
+          <li><strong>My experience:</strong> I was walking and singing before I turned one. As a child I loved pretend play with my cousins, and by age 5 I could talk clearly, read and write with my dad's help. Starting school taught me right from wrong. Today I think things through carefully and consider how a decision will affect me and the people around me.</li>
+          <li><strong>How it explains my development:</strong> In the sensorimotor stage (birth to about 2), babies learn through movement and the senses, like my early walking. In the preoperational stage (about 2 to 7), language and pretend play grow, like my games with my cousins and learning to read and write. In the concrete operational stage (about 7 to 11), children reason logically about real situations and rules, like my understanding of right and wrong at school. In the formal operational stage (about 11 onward), thinking becomes abstract, like weighing consequences before I decide. This is the theory that helped me understand myself best, because it shows how my thinking grew from play to planning.</li>
+          <li><strong>Key terms:</strong> Sensorimotor · Preoperational · Concrete operational · Formal operational · Assimilation and accommodation</li>
+        </ul></div></div>
       </details>
       <details>
-        <summary>Research &amp; Statistics</summary>
-        <div class="body wrap"><div class="inner"><ul><li>Designing small studies and surveys</li><li>Reading and questioning data</li><li>Writing clear reports</li></ul></div></div>
+        <summary>Albert Bandura: Social Cognitive Theory</summary>
+        <div class="body wrap"><div class="inner"><ul>
+          <li><strong>The theory:</strong> Bandura emphasized that people learn by observing others and that our beliefs about ourselves matter. His idea of self-efficacy is the belief that you can carry out the actions needed to reach a goal, and it grows through mastery experiences, when we succeed at something hard (Bandura, 1977).</li>
+          <li><strong>My experience:</strong> My dad taught me to talk, read and write, and my family's opinions guide my decisions. I got through losing my grandmother and a heartbreak in grade 12, and today I handle work and school at the same time.</li>
+          <li><strong>How it explains my development:</strong> Learning from my dad and family fits observational learning, which means learning from role models. Each hardship I have worked through adds to my self-efficacy, my belief that I can handle what comes next. That belief connects to my motto, “Take a risk, or lose the chance,” and to how I describe myself as courageous.</li>
+          <li><strong>Key terms:</strong> Observational learning · Self-efficacy · Mastery experiences</li>
+        </ul></div></div>
       </details>
     </div>
   </section>
 
-  <section class="names" aria-label="Interests">
-    <div class="band">
-      <div class="wrap"><div class="inner"><span>Empathy</span><span>Research</span><span>Wellbeing</span><span>Listening</span></div></div>
-    </div>
-  </section>
+  <!-- Timeline -->
 
-  <section id="projects" class="work">
+  <section id="timeline" class="work">
     <div class="wrap"><div class="inner pad">
       <div class="center">
-        <h2 class="big">Coursework &amp; <em>projects</em></h2>
-        <p>Space for papers, surveys and class projects. Replace these cards with your own.</p>
+        <h2 class="big">My developmental <em>timeline</em></h2>
+        <p>The moments that stand out across physical, cognitive, emotional, social and moral development.</p>
       </div>
-      <div class="work-grid">
-        <article>
-          <div class="ph sq" role="img" aria-label="Placeholder project image"></div>
-          <h3>Project title</h3>
-          <small>Course name · 2026</small>
-          <a class="btn" href="#contact">Details soon →</a>
-        </article>
-        <article>
-          <div class="ph sq alt" role="img" aria-label="Placeholder project image"></div>
-          <h3>Project title</h3>
-          <small>Course name · 2026</small>
-          <a class="btn" href="#contact">Details soon →</a>
-        </article>
-        <article>
-          <div class="ph sq" role="img" aria-label="Placeholder project image"></div>
-          <h3>Project title</h3>
-          <small>Course name · 2026</small>
-          <a class="btn" href="#contact">Details soon →</a>
-        </article>
-      </div>
+      <ol class="tl">
+        <li>
+          <span class="when">2007</span>
+          <h3>Born in Sta. Rita, Pampanga</h3>
+          <span class="type">Physical</span>
+          <p>After a pregnancy that was at risk, I was born at Diosdado Macapagal Hospital through normal delivery.</p>
+          <p><strong>Why it mattered:</strong> Everything on this page starts here, with my family's care around me.</p>
+        </li>
+        <li>
+          <span class="when">Before age 1</span>
+          <h3>First steps and first songs</h3>
+          <span class="type">Physical &amp; cognitive</span>
+          <p>I started walking and singing “Bahay Kubo” before my first birthday.</p>
+          <p><strong>Why it mattered:</strong> It was an early sign of the playful, lively baby my family remembers.</p>
+        </li>
+        <li>
+          <span class="when">Infancy</span>
+          <h3>Bonding with my dad</h3>
+          <span class="type">Emotional</span>
+          <p>My mom began working when I was 3 months old, so my dad cared for me most of the time and our attachment grew.</p>
+          <p><strong>Why it mattered:</strong> It gave me my first sense of security, which Erikson links to trust.</p>
+        </li>
+        <li>
+          <span class="when">Age 3</span>
+          <h3>The living room story</h3>
+          <span class="type">Social</span>
+          <p>My brother and I were home alone when I pooped in the living room, and he poured a gallon of mineral water all over the floor.</p>
+          <p><strong>Why it mattered:</strong> It is my earliest memory, a snapshot of life before school.</p>
+        </li>
+        <li>
+          <span class="when">Age 5</span>
+          <h3>Learning to talk, read and write</h3>
+          <span class="type">Cognitive</span>
+          <p>My dad helped me speak clearly, read and write.</p>
+          <p><strong>Why it mattered:</strong> It gave me the foundation I carried into school.</p>
+        </li>
+        <li>
+          <span class="when">Early school years</span>
+          <h3>Learning right from wrong</h3>
+          <span class="type">Moral</span>
+          <p>School started roughly, and I once pulled a classmate's hair because they took my bag. Over time I came to understand rules and what is right and wrong.</p>
+          <p><strong>Why it mattered:</strong> It was my first lesson in handling conflict and understanding rules.</p>
+        </li>
+        <li>
+          <span class="when">Childhood</span>
+          <h3>Playing outside with my cousins</h3>
+          <span class="type">Social</span>
+          <p>We did pretend play, climbed trees and crawled through rice fields.</p>
+          <p><strong>Why it mattered:</strong> It built my confidence and independence as an extrovert who loves to socialize.</p>
+        </li>
+        <li>
+          <span class="when">Adolescence</span>
+          <h3>Growing taller</h3>
+          <span class="type">Physical</span>
+          <p>I grew taller than my classmates when puberty began.</p>
+          <p><strong>Why it mattered:</strong> My body was changing, but I still felt like the same playful Alex.</p>
+        </li>
+        <li>
+          <span class="when">During COVID-19</span>
+          <h3>Losing my grandmother</h3>
+          <span class="type">Emotional</span>
+          <p>I lost my grandmother during the pandemic.</p>
+          <p><strong>Why it mattered:</strong> It was one of the trials that made me strong and pushed me to go on with life.</p>
+        </li>
+        <li>
+          <span class="when">High school</span>
+          <h3>Striving for the top</h3>
+          <span class="type">Cognitive &amp; social</span>
+          <p>I became competitive and always aimed to be at the top of my class. I graduated with high honors.</p>
+          <p><strong>Why it mattered:</strong> It showed me how much I can achieve when I am determined.</p>
+        </li>
+        <li>
+          <span class="when">Grade 12</span>
+          <h3>A broken heart</h3>
+          <span class="type">Emotional</span>
+          <p>I had my heart broken in my last year of senior high school.</p>
+          <p><strong>Why it mattered:</strong> Like losing my grandmother, it tested me and helped make me who I am today.</p>
+        </li>
+        <li>
+          <span class="when">College</span>
+          <h3>Becoming a working student</h3>
+          <span class="type">Social &amp; emotional</span>
+          <p>I started working, managing my own tasks and money, and I found new friends I can rely on.</p>
+          <p><strong>Why it mattered:</strong> It gave me independence and responsibility, the heart of my emerging adulthood.</p>
+        </li>
+      </ol>
     </div></div>
   </section>
 
-  <!-- description 1 -->
+  <!-- Reflection -->
 
-  <section class="phil">
+  <section id="reflection" class="phil">
     <div class="rows">
-      <h2>What I <em>value</em></h2>
-      <div class="row"><h3>Listening <em>first</em></h3><p>People open up when they feel heard, so I start there.</p></div>
-      <div class="row"><h3>Staying <em>curious</em></h3><p>Every person and every study has something new to teach me.</p></div>
-      <div class="row"><h3>Leading with <em>kindness</em></h3><p>Understanding someone begins with respect for their story.</p></div>
+      <h2>Reflecting on the person <em>I am becoming</em></h2>
+      <div class="row"><h3>The milestone that <em>shaped me</em></h3><p>The experiences that shaped me most were the hard ones: losing my grandmother during COVID-19 and my heartbreak in grade 12. They made me strong and pushed me to go on with life.</p></div>
+      <div class="row"><h3>Who and what <em>influenced me</em></h3><p>Family and school influenced my development the most. My family guides my decisions and keeps inspiring me, and school gave me my first lessons in rules, friendship and drive.</p></div>
+      <div class="row">
+        <h3>How I have <em>changed</em></h3>
+        <p><strong>Physically:</strong> I have long wanted to look slim, because as a child I felt my body was bigger than other kids my age.</p>
+        <p><strong>Cognitively:</strong> I think things through before I decide, including how it will affect me and the people around me.</p>
+        <p><strong>Emotionally:</strong> I have become more emotional than before, maybe because I am always tired.</p>
+        <p><strong>Socially:</strong> I still communicate well with people, but I am more careful about which secrets and stories I share.</p>
+      </div>
+      <div class="row"><h3>What I have <em>learned</em></h3><p>I learned how my development grew and how it affects who I am today. Piaget's theory helped me most, because it showed how my thinking grew from play to careful planning.</p></div>
+      <div class="row"><h3>Who I hope <em>to become</em></h3><p>I want to be someone who values and loves herself, so I can give that same love to the people I love. I also want to travel the world without fear, and to be mentally, financially and physically healthy.</p></div>
     </div>
-    <div class="art"><div class="ph alt" role="img" aria-label="Placeholder image"></div></div>
+    <!-- PHOTO: replace with <div class="ph alt has-img"><img src="reflection.jpg" alt="..."></div> -->
+    <div class="art"><div class="ph alt" role="img" aria-label="Placeholder image. Replace with your own photo."></div></div>
   </section>
 
   <section>
     <div class="wrap"><div class="inner pad center">
       <h2 class="big">Quick <em>facts</em></h2>
       <div class="stats">
-        <div><b>2nd year</b><span>Year level</span></div>
-        <div><b>Psychology</b><span>Program</span></div>
+        <div><b>19 years</b><span>My journey so far</span></div>
+        <div><b>2nd year</b><span>Psychology student</span></div>
         <div><b>Pampanga</b><span>Home province</span></div>
       </div>
+    </div></div>
+  </section>
+
+  <!-- References and image credits -->
+
+  <section id="references">
+    <div class="wrap"><div class="inner pad refs">
+      <h2 class="big"><em>References</em> &amp; credits</h2>
+      <p>The theory descriptions above use these sources, cited in APA 7th edition style.</p>
+      <p class="ref">Bandura, A. (1977). Self-efficacy: Toward a unifying theory of behavioral change. <i>Psychological Review, 84</i>(2), 191–215. <a href="https://doi.org/10.1037/0033-295X.84.2.191">https://doi.org/10.1037/0033-295X.84.2.191</a></p>
+      <p class="ref">Spielman, R. M., Jenkins, W. J., &amp; Lovett, M. D. (2020). Lifespan theories. In <i>Psychology 2e</i> (sec. 9.2). OpenStax. <a href="https://openstax.org/books/psychology-2e/pages/9-2-lifespan-theories">https://openstax.org/books/psychology-2e/pages/9-2-lifespan-theories</a></p>
+      <p><strong>Image credits:</strong> All photographs on this site are my own or come from my family's personal collection.</p>
     </div></div>
   </section>
 
@@ -317,7 +561,7 @@ footer a:hover { text-decoration: underline; }
       <div class="left">
         <span class="tag">Say hi</span>
         <h2 class="big">Get in touch</h2>
-        <p>Have a question, a study idea or just want to chat? Send me a message.</p>
+        <p>Have a question about my journey, or just want to chat? Send me a message.</p>
       </div>
       <form id="contact-form" novalidate>
         <label for="name">Name<input id="name" name="name" autocomplete="name" required></label>
@@ -332,7 +576,7 @@ footer a:hover { text-decoration: underline; }
 
 <footer class="wrap">
   <div class="inner">
-    <a href="#top">Home</a><a href="#about">About</a><a href="#studies">Studies</a><a href="#projects">Projects</a><a href="#contact">Contact</a>
+    <a href="#top">Home</a><a href="#about">About</a><a href="#milestones">Milestones</a><a href="#theories">Theories</a><a href="#timeline">Timeline</a><a href="#reflection">Reflection</a><a href="#references">References</a><a href="#contact">Contact</a>
     <span>© 2026 Gennay Alex Salinas</span>
   </div>
 </footer>
