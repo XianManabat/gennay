@@ -213,14 +213,26 @@ details li + li { margin-top: 8px; }
 }
 
 /* Cover page: full-height hero with the welcome photo. */
-.hero.cover { grid-template-columns: 1.3fr 1fr; min-height: calc(100vh - 62px); min-height: calc(100svh - 62px); }
-.hero.cover .art { position: relative; padding: 0; display: block; overflow: hidden; background: var(--pink-soft); }
-.hero.cover .art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 32% 40%; display: block; }
-.hero.cover .copy { background: var(--panel); }
+.hero.cover { display: grid; grid-template-columns: 1fr; min-height: calc(100vh - 62px); min-height: calc(100svh - 62px); position: relative; overflow: hidden; }
+.hero.cover > .art, .hero.cover > .copy { grid-area: 1 / 1; }
+.hero.cover .art { position: relative; padding: 0; display: block; border-right: 0; background: var(--pink-soft); }
+.hero.cover .art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% 40%; display: block; }
+/* greeting floats over the photo on a shadowed card */
+.hero.cover .copy {
+  position: relative; z-index: 2; align-self: center; justify-self: end;
+  width: min(520px, calc(100% - 32px)); margin: 32px max(24px, 5vw) 32px 24px;
+  padding: 44px 40px; gap: 20px;
+  background: color-mix(in srgb, var(--panel) 88%, transparent);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border: 1px solid var(--line);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .35), 0 4px 14px rgba(0, 0, 0, .2);
+}
+.hero.cover h1 { font-size: clamp(40px, 5vw, 68px); }
+.hero.cover .tag { position: absolute; top: -20px; left: 24px; }
 @media (max-width: 860px) {
-  .hero.cover { min-height: 0; }
-  .hero.cover .art { padding: 0; height: 68vw; min-height: 320px; max-height: 520px; }
-  .hero.cover .art img { object-position: 30% 35%; }
+  .hero.cover { min-height: calc(100svh - 62px); }
+  .hero.cover .art img { object-position: 32% 30%; }
+  .hero.cover .copy { align-self: end; justify-self: center; width: calc(100% - 32px); margin: 24px 16px 20px; padding: 36px 22px 26px; }
 }
 </style>
 
@@ -247,8 +259,8 @@ details li + li { margin-top: 8px; }
 <main id="top">
   <section class="hero cover">
     <!-- COVER PHOTO: save the photo as cover.jpg in the same folder as this file -->
-    <div class="art"><img src="cover.jpg" alt="Alex in a navy off-shoulder dress, smiling softly and resting her cheek on her hand among yellow flowers" fetchpriority="high"></div>
-    <div class="copy" style="padding-right:max(20px, env(safe-area-inset-right, 0px))">
+    <div class="art"><img src="pictures/backgroudpicture.jpg" alt="Alex in a navy off-shoulder dress, smiling softly and resting her cheek on her hand among yellow flowers" fetchpriority="high"></div>
+    <div class="copy">
       <span class="tag">Hello there</span>
       <h1>Welcome to my developmental <em>journey</em></h1>
       <p>I'm Gennay Alex Salinas, but please call me Alex. I'm a 19-year-old psychology student from Pampanga, Philippines. This site follows my 19 years, from birth to today, along with the developmental theories that connect to my story.</p>
