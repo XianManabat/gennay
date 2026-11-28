@@ -238,6 +238,24 @@ details li + li { margin-top: 8px; }
   .hero.cover .art img { object-position: 32% 30%; }
   .hero.cover .copy { align-self: end; justify-self: center; width: calc(100% - 32px); margin: 24px 16px 20px; padding: 36px 22px 26px; }
 }
+
+/* Reflection gallery: masonry of framed photos, each shown in full at its own proportions. */
+.phil .art.gallery { display: block; padding: 40px 32px; }
+.g-title { font-size: clamp(30px, 3.4vw, 44px); text-align: center; margin-bottom: 28px; }
+.g-grid { columns: 2; column-gap: 16px; }
+.shot { margin: 0 0 16px; break-inside: avoid; background: var(--panel); border: 1px solid var(--line); padding: 8px 8px 6px; box-shadow: 0 8px 22px rgba(0, 0, 0, .14); transition: transform .2s ease; }
+.shot:nth-child(odd) { transform: rotate(-1.2deg); }
+.shot:nth-child(even) { transform: rotate(1deg); }
+.shot:hover { transform: rotate(0) scale(1.03); position: relative; z-index: 1; }
+.shot img { display: block; width: 100%; height: auto; }
+.shot .tile { width: 100%; aspect-ratio: var(--r, 4/5); background: var(--pink); position: relative; overflow: hidden; }
+.shot .tile::after { content: ""; position: absolute; left: 50%; top: 24%; width: 28%; aspect-ratio: 1; transform: translateX(-50%); background: var(--bg); border-radius: 50%; }
+.shot figcaption { font-family: var(--font-script); font-size: 22px; line-height: 1.2; text-align: center; color: var(--accent-text); padding-top: 4px; }
+@media (max-width: 420px) { .g-grid { columns: 1; } }
+@media (prefers-reduced-motion: reduce) { .shot { transition: none; } }
+/* Gallery drop-down: minimized shows a preview with a fade, expanded shows everything. */
+.gallery.collapsed .g-grid { max-height: 560px; overflow: hidden; -webkit-mask-image: linear-gradient(#000 65%, transparent); mask-image: linear-gradient(#000 65%, transparent); }
+.g-toggle { display: flex; justify-content: center; margin-top: 20px; }
 </style>
 
 </head>
@@ -263,7 +281,7 @@ details li + li { margin-top: 8px; }
 <main id="top">
   <section class="hero cover">
     <!-- COVER PHOTO: save the photo as cover.jpg in the same folder as this file -->
-    <div class="art"><img src="cover.jpg" alt="Alex in a navy off-shoulder dress, smiling softly and resting her cheek on her hand among yellow flowers" fetchpriority="high"></div>
+    <div class="art"><img src="pictures/backgroudpicture.jpg" alt="Alex in a navy off-shoulder dress, smiling softly and resting her cheek on her hand among yellow flowers" fetchpriority="high"></div>
     <div class="copy">
       <span class="tag">Hello there</span>
       <h1>Welcome to my developmental <em>journey</em></h1>
@@ -289,7 +307,7 @@ details li + li { margin-top: 8px; }
         <a class="btn" href="#milestones">See my milestones →</a>
       </div>
       <!-- PHOTO: replace with <div class="ph wide has-img"><img src="about.jpg" alt="..."></div> -->
-      <div class="ph wide" role="img" aria-label="Placeholder photo of Alex. Replace with your own photo."></div>
+       <div class="ph wide has-img"><img src="pictures/about me1.jfif" alt="..."></div>
     </div></div>
   </section>
 
@@ -350,7 +368,7 @@ details li + li { margin-top: 8px; }
         </ul>
       </div>
       <!-- PHOTO: replace with <div class="ph wide has-img"><img src="childhood.jpg" alt="Alex as a child"></div> -->
-      <div class="ph wide alt" role="img" aria-label="Placeholder photo from childhood. Replace with your own photo."></div>
+      <div class="ph wide has-img"><img src="pictures/childhood.jfif" alt="Alex as a child"></div>
     </div></div>
   </section>
 
@@ -371,7 +389,7 @@ details li + li { margin-top: 8px; }
         </ul>
       </div>
       <!-- PHOTO: replace with <div class="ph wide has-img"><img src="teen.jpg" alt="Alex as a teenager"></div> -->
-      <div class="ph wide" role="img" aria-label="Placeholder photo from my teenage years. Replace with your own photo."></div>
+      <div class="ph wide has-img"><img src="pictures/teenage.jfif" alt="Alex as a teenager"></div>
     </div></div>
   </section>
 
@@ -392,7 +410,7 @@ details li + li { margin-top: 8px; }
         </ul>
       </div>
       <!-- PHOTO: replace with <div class="ph wide has-img"><img src="today.jpg" alt="Alex today"></div> -->
-      <div class="ph wide alt" role="img" aria-label="Placeholder photo of Alex today. Replace with your own photo."></div>
+      <div class="ph wide has-img"><img src="pictures/whom.jfif" alt="Alex today"></div>
     </div></div>
   </section>
 
@@ -554,8 +572,32 @@ details li + li { margin-top: 8px; }
       <div class="row"><h3>What I have <em>learned</em></h3><p>I learned how my development grew and how it affects who I am today. Piaget's theory helped me most, because it showed how my thinking grew from play to careful planning.</p></div>
       <div class="row"><h3>Who I hope <em>to become</em></h3><p>I want to be someone who values and loves herself, so I can give that same love to the people I love. I also want to travel the world without fear, and to be mentally, financially and physically healthy.</p></div>
     </div>
-    <!-- PHOTO: replace with <div class="ph alt has-img"><img src="reflection.jpg" alt="..."></div> -->
-    <div class="art"><div class="ph alt" role="img" aria-label="Placeholder image. Replace with your own photo."></div></div>
+    <!-- GALLERY: add or remove <figure class="shot"> blocks freely; each photo shows in full. -->
+    <div class="art gallery collapsed" id="gallery">
+      <h3 class="g-title"><em>Moments</em> along the way</h3>
+      <div class="g-grid" id="gallery-grid">
+        <figure class="shot"><img src="pictures/6c7eb313-f53e-44e2-9626-9a386c7af2d6.jfif" alt="A moment from my journey" loading="lazy"></figure>
+        <figure class="shot"><img src="pictures/7c33872f-57bc-41e0-be4e-3f4a34022cab.jfif" alt="A moment from my journey" loading="lazy"></figure>
+        <figure class="shot"><img src="pictures/7db124a0-856d-4e8c-a92b-ebaf471209f4.jfif" alt="A moment from my journey" loading="lazy"></figure>
+        <figure class="shot"><img src="pictures/040bd4d2-af83-4cd0-a390-edf491632f1e.jfif" alt="A moment from my journey" loading="lazy"></figure>
+        <figure class="shot"><img src="pictures/42ca7d94-6bb2-47b6-97bf-f2b3386e8ab0.jfif" alt="A moment from my journey" loading="lazy"></figure>
+        <figure class="shot"><img src="pictures/85e4cdba-f25a-49f5-b32c-bd9ddc40bce7.jfif" alt="A moment from my journey" loading="lazy"></figure>
+        <figure class="shot"><img src="pictures/801db64e-1521-4f59-903a-731cd650f741.jfif" alt="A moment from my journey" loading="lazy"></figure>
+        <figure class="shot"><img src="pictures/05229bd6-4638-49bd-8e7b-e90aea8fb45c.jfif" alt="A moment from my journey" loading="lazy"></figure>
+        <figure class="shot"><img src="pictures/86576e27-7296-4598-8e0f-734f013772d8.jfif" alt="A moment from my journey" loading="lazy"></figure>
+        <figure class="shot"><img src="pictures/820389b6-9eb3-44f3-b01a-b264b8d2af25.jfif" alt="A moment from my journey" loading="lazy"></figure>
+        <figure class="shot"><img src="pictures/ab224fa8-d2ba-4a97-bc3c-eca9c10968a4.jfif" alt="A moment from my journey" loading="lazy"></figure>
+        <figure class="shot"><img src="pictures/baeb04db-16e2-4b26-b3fd-1df851dcdd02.jfif" alt="A moment from my journey" loading="lazy"></figure>
+        <figure class="shot"><img src="pictures/bd01a274-d36a-49ad-a655-cfbd978f5691.jfif" alt="A moment from my journey" loading="lazy"></figure>
+        <figure class="shot"><img src="pictures/bd9e3154-3f29-4eee-a442-cda7af0aa584.jfif" alt="A moment from my journey" loading="lazy"></figure>
+        <figure class="shot"><img src="pictures/ca8a99c2-d631-40dc-ab9a-1030ba657158.jfif" alt="A moment from my journey" loading="lazy"></figure>
+        <figure class="shot"><img src="pictures/d6a76c5f-10cf-4f41-b323-471eb3f54d88.jfif" alt="A moment from my journey" loading="lazy"></figure>
+        <figure class="shot"><img src="pictures/d310acd1-a927-4b09-8336-69afeb6b352b.jfif" alt="A moment from my journey" loading="lazy"></figure>
+        <figure class="shot"><img src="pictures/dc846150-b982-4f56-859d-c0e80d182622.jfif" alt="A moment from my journey" loading="lazy"></figure>
+        <figure class="shot"><img src="pictures/faa83f1a-3354-41fb-8195-d00409663608.jfif" alt="A moment from my journey" loading="lazy"></figure>
+      </div>
+      <div class="g-toggle"><button class="btn" id="gallery-toggle" type="button" aria-expanded="false" aria-controls="gallery-grid">Show the whole gallery ▾</button></div>
+    </div>
   </section>
 
   <section>
@@ -617,6 +659,19 @@ details li + li { margin-top: 8px; }
       return;
     }
     note.textContent = 'Preview only: this form is not connected to an inbox yet.';
+  });
+})();
+</script>
+<script>
+(function () {
+  var gallery = document.getElementById('gallery');
+  var btn = document.getElementById('gallery-toggle');
+  if (!gallery || !btn) return;
+  btn.addEventListener('click', function () {
+    var minimized = gallery.classList.toggle('collapsed');
+    btn.setAttribute('aria-expanded', minimized ? 'false' : 'true');
+    btn.textContent = minimized ? 'Show the whole gallery ▾' : 'Minimize gallery ▴';
+    if (minimized) gallery.scrollIntoView({ block: 'start' });
   });
 })();
 </script>
