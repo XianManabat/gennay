@@ -212,6 +212,10 @@ details li + li { margin-top: 8px; }
   .tl li { padding-left: 22px; }
 }
 
+/* Real photos show in full, uncropped, at their own proportions. */
+.ph.has-img { aspect-ratio: auto; max-width: none; background: transparent; border: 0; display: grid; place-items: center; }
+.ph.has-img img { position: static; inset: auto; width: auto; max-width: 100%; height: auto; max-height: 80vh; object-fit: contain; display: block; border: 1px solid var(--line); }
+
 /* Cover page: full-height hero with the welcome photo. */
 .hero.cover { display: grid; grid-template-columns: 1fr; min-height: calc(100vh - 62px); min-height: calc(100svh - 62px); position: relative; overflow: hidden; }
 .hero.cover > .art, .hero.cover > .copy { grid-area: 1 / 1; }
@@ -259,7 +263,7 @@ details li + li { margin-top: 8px; }
 <main id="top">
   <section class="hero cover">
     <!-- COVER PHOTO: save the photo as cover.jpg in the same folder as this file -->
-    <div class="art"><img src="pictures/backgroudpicture.jpg" alt="Alex in a navy off-shoulder dress, smiling softly and resting her cheek on her hand among yellow flowers" fetchpriority="high"></div>
+    <div class="art"><img src="cover.jpg" alt="Alex in a navy off-shoulder dress, smiling softly and resting her cheek on her hand among yellow flowers" fetchpriority="high"></div>
     <div class="copy">
       <span class="tag">Hello there</span>
       <h1>Welcome to my developmental <em>journey</em></h1>
@@ -325,8 +329,7 @@ details li + li { margin-top: 8px; }
           <li>A strong attachment to my dad, my main caregiver</li>
         </ul>
       </div>
-      <!-- PHOTO: replace with <div class="ph wide has-img"><img src="infancy.jpg" alt="Alex as a baby"></div> -->
-      <div class="ph wide" role="img" aria-label="Placeholder photo from infancy. Replace with your own photo."></div>
+      <div class="ph wide has-img"><img src="pictures/infancy.jfif" alt="Alex as a baby, held by her dad"></div>
     </div></div>
   </section>
 
